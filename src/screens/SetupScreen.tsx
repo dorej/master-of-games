@@ -12,7 +12,6 @@ export default function SetupScreen({ type, info, onBack, onStart }: Props) {
   const [names, setNames] = useState<string[]>(['', '']);
   const [holeCount, setHoleCount] = useState(9);
   const [targetScore, setTargetScore] = useState(500);
-  const [mustGoOut, setMustGoOut] = useState(false);
   const [conditions, setConditions] = useState<
     { playerIdx: number; text: string }[]
   >([{ playerIdx: 0, text: '' }]);
@@ -40,7 +39,6 @@ export default function SetupScreen({ type, info, onBack, onStart }: Props) {
       names,
       holeCount: Math.min(18, Math.max(1, holeCount || 9)),
       targetScore,
-      mustGoOut,
       conditions: conditions
         .filter((c) => c.text.trim())
         .map((c) => ({
@@ -133,17 +131,9 @@ export default function SetupScreen({ type, info, onBack, onStart }: Props) {
               <option value={1000}>1000 points</option>
             </select>
           </label>
-          <label className="check-field">
-            <input
-              type="checkbox"
-              checked={mustGoOut}
-              onChange={(e) => setMustGoOut(e.target.checked)}
-            />
-            <span>Must go out to win</span>
-          </label>
           <p className="muted small-note">
-            With this on, reaching the target is not enough — the player must
-            also be the one who emptied their hand in that round.
+            On the scorecard, enter each hand’s net score: melded points minus
+            cards left in hand.
           </p>
         </section>
       )}

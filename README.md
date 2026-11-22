@@ -20,9 +20,8 @@ Each game includes a built-in "How to score" reference on its setup screen.
 ### Rummy 500 options
 
 - Selectable target score: 250, 300, 500, or 1000 points.
-- Optional "must go out to win" rule.
-- Per-round entry for melded points and cards left in hand, with the net score
-  calculated automatically.
+- One net-score box per player per hand: enter melded points minus cards left
+  in hand.
 - Card reference: A = 15 (1 or 5 when used low), K/Q/J/10 = 10, 2–9 = face
   value, Joker = 15.
 
@@ -44,6 +43,7 @@ Open the local URL printed by Vite.
 | `npm run dev` | Start the Vite development server. |
 | `npm run build` | Type-check with TypeScript and build for production. |
 | `npm run preview` | Preview the production build locally. |
+| `npm run deploy` | Type-check, build, publish `dist/`, and verify the live site. |
 
 ## How it works
 
@@ -83,9 +83,10 @@ src/
 
 ## Deployment
 
-The live site is published with GitHub Pages from the `gh-pages` branch:
+`npm run deploy` publishes the generated `dist/` directory to `origin/gh-pages`
+by default:
 
-https://tyduptyler13.github.io/score-card/
+https://dorej.github.io/score-card/
 
-To publish an update, run `npm run build` and deploy the generated `dist/`
-directory to the `gh-pages` branch.
+The upstream project remains at https://tyduptyler13.github.io/score-card/.
+Override the destination with `DEPLOY_REMOTE`, `DEPLOY_BRANCH`, and `SITE_URL`.

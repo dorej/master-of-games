@@ -36,15 +36,12 @@ export interface GolfGame extends BaseGame {
 }
 
 export interface Rummy500Round {
-  melds: Scores;
-  hands: Scores;
-  wentOut: string[];
+  scores: Scores;
 }
 
 export interface Rummy500Game extends BaseGame {
   type: 'rummy500';
   target: number;
-  mustGoOut: boolean;
   rounds: Rummy500Round[];
 }
 
@@ -70,7 +67,6 @@ export interface GameSetup {
   holeCount: number;
   conditions: { playerIdx: number; text: string }[];
   targetScore: number;
-  mustGoOut: boolean;
 }
 
 export interface Standing {

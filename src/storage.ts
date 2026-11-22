@@ -1,4 +1,4 @@
-import type { Game } from './types';
+import type { Game, Scores } from './types';
 
 const KEY = 'score-card.games.v1';
 
@@ -17,6 +17,45 @@ export function loadGames(): Game[] {
         Array.isArray((g as Game).players),
     );
     return games.map((g) => {
+      if (g.type === 'rummy500') {
+        const legacy = g as unknown as {
+          target?: unknown;
+          rounds?: unknown;
+        };
+        const rounds = Array.isArray(legacy.rounds)
+          ? legacy.rounds.map((raw) => {
+              const round = raw as {
+                scores?: Scores;
+                melds?: Scores;
+                hands?: Scores;
+              };
+              if (round.scores) return { scores: round.scores };
+              const melds = round.melds ?? {};
+              const hands = round.hands ?? {};
+              const scores: Scores = {};
+              for (const id of new Set([
+                ...Object.keys(melds),
+                ...Object.keys(hands),
+              ])) {
+                const meld = melds[id];
+                const hand = hands[id];
+                if (meld == null && hand == null) continue;
+                scores[id] = (meld ?? 0) - (hand ?? 0);
+              }
+              return { scores };
+            })
+          : [];
+        return {
+          id: g.id,
+          type: 'rummy500' as const,
+          players: g.players,
+          createdAt: g.createdAt,
+          updatedAt: g.updatedAt,
+          target:
+            typeof legacy.target === 'number' ? legacy.target : 500,
+          rounds,
+        };
+      }
       if (g.type === 'custom') {
         if (!Array.isArray(g.conditions)) return { ...g, conditions: [] };
         const fixed = g.conditions.map((c: any) => ({
