@@ -18,7 +18,7 @@ export default function ScorecardScreen({ game, onChange, onBack }: Props) {
   const winners = winnerIds(game);
 
   return (
-    <div className="page wide">
+    <div className="page wide game-theme" data-game={game.type}>
       <header className="scorecard-header">
         <button className="btn ghost back" onClick={onBack}>
           ← All games

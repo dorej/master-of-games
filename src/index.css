@@ -992,3 +992,333 @@ thead .player-col {
     align-items: flex-start;
   }
 }
+
+body:has(.game-theme) {
+  --game-bg: #110b1d;
+  --game-panel: #1a1429;
+  --game-panel-2: #251a3a;
+  --game-line: #3c2f5a;
+  --game-ink: #f5f0ff;
+  --game-muted: #b6a9ce;
+  --game-accent: #a78bfa;
+  --game-accent-bright: #d8c8ff;
+  --game-accent-dark: #5b21b6;
+  --game-tint: rgba(167, 139, 250, 0.16);
+  --game-glow: rgba(139, 92, 246, 0.24);
+  --game-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+  background:
+    radial-gradient(1000px 520px at 50% -10%, var(--game-glow), transparent 62%),
+    radial-gradient(800px 420px at 50% 110%, var(--game-glow), transparent 60%),
+    var(--game-bg);
+  color: var(--game-ink);
+}
+
+body:has(.game-theme[data-game='phase10']) {
+  --game-bg: #150c08;
+  --game-panel: #1f1512;
+  --game-panel-2: #2b1c15;
+  --game-line: #4a2e22;
+  --game-ink: #f7eadf;
+  --game-muted: #c0a494;
+  --game-accent: #ff9d3d;
+  --game-accent-bright: #ffc169;
+  --game-accent-dark: #a24c10;
+  --game-tint: rgba(255, 157, 61, 0.15);
+  --game-glow: rgba(255, 92, 26, 0.24);
+}
+
+body:has(.game-theme[data-game='fivecrowns']) {
+  --game-bg: #151205;
+  --game-panel: #201b0f;
+  --game-panel-2: #2c2412;
+  --game-line: #4c3f1d;
+  --game-ink: #fff6d8;
+  --game-muted: #cec197;
+  --game-accent: #f5c451;
+  --game-accent-bright: #ffe08a;
+  --game-accent-dark: #8a6510;
+  --game-tint: rgba(245, 196, 81, 0.15);
+  --game-glow: rgba(245, 196, 81, 0.22);
+}
+
+body:has(.game-theme[data-game='rummy500']) {
+  --game-bg: #110b1d;
+  --game-panel: #1a1429;
+  --game-panel-2: #251a3a;
+  --game-line: #3c2f5a;
+  --game-ink: #f5f0ff;
+  --game-muted: #b6a9ce;
+  --game-accent: #a78bfa;
+  --game-accent-bright: #d8c8ff;
+  --game-accent-dark: #5b21b6;
+  --game-tint: rgba(167, 139, 250, 0.16);
+  --game-glow: rgba(139, 92, 246, 0.24);
+}
+
+body:has(.game-theme[data-game='golf']) {
+  --game-bg: #071512;
+  --game-panel: #0f221d;
+  --game-panel-2: #163029;
+  --game-line: #245046;
+  --game-ink: #e9fff7;
+  --game-muted: #9fc9bb;
+  --game-accent: #5eead4;
+  --game-accent-bright: #a7f3d0;
+  --game-accent-dark: #0f766e;
+  --game-tint: rgba(94, 234, 212, 0.14);
+  --game-glow: rgba(16, 185, 129, 0.22);
+}
+
+body:has(.game-theme[data-game='custom']) {
+  --game-bg: #170a12;
+  --game-panel: #23121b;
+  --game-panel-2: #321927;
+  --game-line: #552b42;
+  --game-ink: #fff0f5;
+  --game-muted: #d3a6b9;
+  --game-accent: #fb7185;
+  --game-accent-bright: #fda4af;
+  --game-accent-dark: #9f1239;
+  --game-tint: rgba(251, 113, 133, 0.15);
+  --game-glow: rgba(225, 29, 72, 0.22);
+}
+
+.game-theme {
+  color: var(--game-ink);
+}
+
+.game-theme h1,
+.game-theme h2,
+.game-theme h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+}
+
+.game-theme .muted {
+  color: var(--game-muted);
+}
+
+.game-theme .page-header,
+.game-theme .scorecard-header {
+  position: relative;
+  padding: 0.75rem 0 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--game-line);
+}
+
+.game-theme .page-header::after,
+.game-theme .scorecard-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--game-accent-dark),
+    var(--game-accent),
+    var(--game-accent-bright),
+    var(--game-accent),
+    var(--game-accent-dark)
+  );
+  box-shadow: 0 0 16px var(--game-glow);
+}
+
+.game-theme .page-header h1,
+.game-theme .scorecard-title h1 {
+  color: var(--game-accent-bright);
+}
+
+.game-theme .scorecard-title h1 {
+  font-size: 1.5rem;
+}
+
+.game-theme .pill {
+  background: var(--game-tint);
+  border: 1px solid var(--game-line);
+  color: var(--game-accent-bright);
+}
+
+.game-theme .btn {
+  border-color: var(--game-line);
+  background: var(--game-panel);
+  color: var(--game-ink);
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.game-theme .btn.primary {
+  border-color: var(--game-accent);
+  background: linear-gradient(180deg, var(--game-accent-bright), var(--game-accent));
+  box-shadow: 0 5px 0 var(--game-accent-dark);
+  color: var(--game-bg);
+  font-weight: 800;
+}
+
+.game-theme .btn.primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--game-accent-dark);
+}
+
+.game-theme .btn.ghost {
+  border-color: var(--game-line);
+  background: var(--game-panel-2);
+  color: var(--game-accent-bright);
+}
+
+.game-theme .btn.danger {
+  border-color: #7f2d2d;
+  background: #2a1113;
+  color: #ffb4b4;
+}
+
+.game-theme .rules,
+.game-theme .setup-section,
+.game-theme .card,
+.game-theme .saved-panel,
+.game-theme .empty {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--game-line);
+  background: linear-gradient(180deg, var(--game-panel-2), var(--game-panel));
+  box-shadow: var(--game-shadow);
+  color: var(--game-ink);
+}
+
+.game-theme .rules::before,
+.game-theme .setup-section::before,
+.game-theme .card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--game-accent-dark), var(--game-accent), var(--game-accent-bright));
+}
+
+.game-theme .section-title,
+.game-theme .rules summary {
+  color: var(--game-accent-bright);
+}
+
+.game-theme .rules ul {
+  color: var(--game-muted);
+}
+
+.game-theme input,
+.game-theme select {
+  border-color: var(--game-line);
+  border-radius: 10px;
+  background: var(--game-bg);
+  color: var(--game-ink);
+}
+
+.game-theme input:focus,
+.game-theme select:focus,
+.game-theme .score-input:focus {
+  outline: 2px solid var(--game-accent);
+  outline-offset: 1px;
+}
+
+.game-theme .banner.win {
+  border-color: var(--game-accent);
+  background: linear-gradient(180deg, var(--game-tint), var(--game-panel));
+  color: var(--game-accent-bright);
+}
+
+.game-theme .standing {
+  border-color: var(--game-line);
+  background: linear-gradient(180deg, var(--game-panel-2), var(--game-panel));
+  box-shadow: var(--game-shadow);
+}
+
+.game-theme .standing.winner {
+  border-color: var(--game-accent);
+  box-shadow: 0 0 0 2px var(--game-tint), var(--game-shadow);
+}
+
+.game-theme .standing .rank,
+.game-theme .standing .detail {
+  color: var(--game-muted);
+}
+
+.game-theme .standing .value,
+.game-theme .standing.winner .value {
+  color: var(--game-accent-bright);
+}
+
+.game-theme .score-table {
+  border-color: var(--game-line);
+  background: var(--game-panel);
+}
+
+.game-theme .score-table th,
+.game-theme .score-table td {
+  border-color: var(--game-line);
+}
+
+.game-theme .score-table thead th {
+  background: var(--game-tint);
+  color: var(--game-accent-bright);
+}
+
+.game-theme .player-col,
+.game-theme thead .player-col {
+  background: var(--game-panel);
+  color: var(--game-ink);
+}
+
+.game-theme .total-col,
+.game-theme .vertical-table tfoot th,
+.game-theme .vertical-table tfoot td {
+  background: var(--game-tint);
+  color: var(--game-accent-bright);
+}
+
+.game-theme .score-input {
+  border-color: var(--game-line);
+  background: var(--game-bg);
+  color: var(--game-ink);
+}
+
+.game-theme .round-delete {
+  color: var(--game-muted);
+}
+
+.game-theme .round-delete:hover {
+  color: var(--game-accent-bright);
+}
+
+.game-theme .phase-badge {
+  color: var(--game-accent-bright);
+}
+
+.game-theme .phase-check input,
+.game-theme .check input {
+  accent-color: var(--game-accent);
+}
+
+.game-theme .phase-goals li {
+  border-color: var(--game-line);
+  background: var(--game-bg);
+}
+
+.game-theme .phase-goals li.current {
+  border-color: var(--game-accent);
+  background: var(--game-tint);
+}
+
+.game-theme .tag.on {
+  background: var(--game-accent);
+  color: var(--game-bg);
+}
+
+.game-theme .tag.done {
+  background: #164e3b;
+  color: #a7f3d0;
+}
+
+.game-theme .condition-num {
+  color: var(--game-accent-bright);
+}

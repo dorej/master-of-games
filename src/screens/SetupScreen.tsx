@@ -49,7 +49,7 @@ export default function SetupScreen({ type, info, onBack, onStart }: Props) {
   }
 
   return (
-    <div className="page">
+    <div className="page game-theme" data-game={type}>
       <header className="page-header">
         <button className="btn ghost back" onClick={onBack}>
           ← Back

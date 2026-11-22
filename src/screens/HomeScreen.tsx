@@ -74,7 +74,7 @@ export default function HomeScreen({ games, onNew, onOpen, onDelete }: Props) {
                 onClick={() => onNew(type)}
               >
                 <span className="game-icon" aria-hidden="true">
-                  <FontAwesomeIcon icon={GAME_ICONS[type]} />
+                  <FontAwesomeIcon icon={GAME_ICONS[type]} size="5x" />
                 </span>
                 <h3>{info.name}</h3>
                 <p>{info.blurb}</p>
