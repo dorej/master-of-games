@@ -3,6 +3,9 @@
 A lightweight scorecard for card-game nights. Track players, rounds, and running
 totals in the browser — no account, backend, or spreadsheet required.
 
+The home menu also links to Janty (Chardee McDennis), the companion firepit
+party game.
+
 **Live app:** https://tyduptyler13.github.io/score-card/
 
 ## Games supported
@@ -34,14 +37,15 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite.
+Open the local URL printed by Vite; the production preview includes the
+`/score-card/` subpath.
 
 ## Scripts
 
 | Command | Description |
 | --- | --- |
 | `npm run dev` | Start the Vite development server. |
-| `npm run build` | Type-check with TypeScript and build for production. |
+| `npm run build` | Type-check and build for production with the `/score-card/` base. |
 | `npm run preview` | Preview the production build locally. |
 | `npm run deploy` | Type-check, build, publish `dist/`, and verify the live site. |
 
@@ -83,8 +87,8 @@ src/
 
 ## Deployment
 
-`npm run deploy` publishes the generated `dist/` directory to `origin/gh-pages`
-by default:
+`npm run deploy` builds with Vite base `/score-card/` and publishes the
+generated `dist/` directory to `origin/gh-pages` by default:
 
 https://dorej.github.io/score-card/
 

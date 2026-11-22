@@ -12,7 +12,6 @@ const flags = {
 const remote = process.env.DEPLOY_REMOTE || "origin";
 const branch = process.env.DEPLOY_BRANCH || "gh-pages";
 const prefix = process.env.DEPLOY_PREFIX || "dist";
-const siteUrl = process.env.SITE_URL || "https://dorej.github.io/score-card/";
 const usage = [
   "Usage: npm run deploy -- [flags]",
   "",
@@ -20,7 +19,12 @@ const usage = [
   "  --skip-build   Skip npm run build",
   "  --no-verify    Skip live-site verification",
   "  --dry-run      Build and compute the deploy commit without pushing",
-  "  --help         Show this message"
+  "  --help         Show this message",
+  "",
+  "Environment:",
+  "  DEPLOY_SUBPATH   Override the package-name subpath",
+  "  DEPLOY_BASE      Override the Vite base",
+  "  SITE_URL         Override the verification URL"
 ].join("\n");
 
 const rootResult = spawnSync(process.env.GIT || "git", ["rev-parse", "--show-toplevel"], { encoding: "utf8" });
@@ -28,6 +32,12 @@ if (rootResult.error || rootResult.status !== 0) {
   throw new Error("Run this script from inside a git repository.");
 }
 const root = rootResult.stdout.trim();
+
+const packageInfo = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+const projectName = String(packageInfo.name || "").replace(/^@[^/]+\//, "").replace(/^\/+|\/+$/g, "");
+const subpath = (process.env.DEPLOY_SUBPATH || projectName || "app").replace(/^\/+|\/+$/g, "");
+const base = process.env.DEPLOY_BASE || `/${subpath}/`;
+const siteUrl = process.env.SITE_URL || `https://dorej.github.io/${subpath}/`;
 
 function run(cmd, cmdArgs, options = {}) {
   const result = spawnSync(cmd, cmdArgs, {
@@ -101,8 +111,8 @@ async function main() {
   }
 
   if (flags.build) {
-    console.log("Building dist/...");
-    run(process.platform === "win32" ? "npm.cmd" : "npm", ["run", "build"]);
+    console.log(`Building ${prefix}/ with base ${base}...`);
+    run(process.platform === "win32" ? "npm.cmd" : "npm", ["run", "build", "--", `--base=${base}`]);
   }
 
   const git = findGit();

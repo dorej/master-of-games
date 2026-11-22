@@ -165,6 +165,16 @@ h2 {
     border-color 0.12s ease;
 }
 
+a.game-type-card {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.companion-card {
+  background: linear-gradient(180deg, var(--surface), var(--accent-soft));
+}
+
 .game-type-card:hover {
   transform: translateY(-2px);
   border-color: var(--accent);

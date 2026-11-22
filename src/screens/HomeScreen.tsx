@@ -9,6 +9,8 @@ const ORDER: GameType[] = [
   'custom',
 ];
 
+const JANTY_URL = 'https://dorej.github.io/janty/';
+
 interface Props {
   games: Game[];
   onNew: (type: GameType) => void;
@@ -41,6 +43,19 @@ export default function HomeScreen({ games, onNew, onOpen, onDelete }: Props) {
             </button>
           );
         })}
+        <a
+          className="game-type-card companion-card"
+          href={JANTY_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <h2>Janty (Chardee McDennis)</h2>
+          <p>
+            The companion firepit party game — trivia, dares, black cards, and
+            one device per player.
+          </p>
+          <span className="cta">Open Janty →</span>
+        </a>
       </section>
 
       <section>
