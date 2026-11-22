@@ -24,7 +24,7 @@ export default function HomeScreen({ games, onNew, onOpen, onDelete }: Props) {
   return (
     <div className="page">
       <header className="page-header">
-        <h1>Scorecard</h1>
+        <h1>Master of Games</h1>
         <p className="muted">Pick a game to start tracking scores.</p>
       </header>
 
