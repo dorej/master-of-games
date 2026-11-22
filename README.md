@@ -3,8 +3,9 @@
 A lightweight scorecard for card-game nights. Track players, rounds, and running
 totals in the browser — no account, backend, or spreadsheet required.
 
-The home menu also links to Janty (Chardee McDennis), the companion firepit
-party game.
+The home screen is split into Score cards for tracked games and Games for full
+companion experiences. Janty (Chardee McDennis) is the first game in the Games
+section.
 
 **Live app:** https://dorej.github.io/master-of-games/
 

@@ -1,5 +1,5 @@
 import type { Rummy500Game } from '../../types';
-import { RoundHeader, ScoreInput } from './shared';
+import { ScoreInput } from './shared';
 
 interface Props {
   game: Rummy500Game;
@@ -27,28 +27,33 @@ export default function Rummy500Card({ game, update }: Props) {
   return (
     <section className="card">
       <div className="table-scroll">
-        <table className="score-table">
+        <table className="score-table vertical-table">
           <thead>
             <tr>
-              <th className="player-col">Player</th>
-              {game.rounds.map((_, i) => (
-                <RoundHeader
-                  key={i}
-                  index={i + 1}
-                  onDelete={() => deleteRound(i)}
-                />
+              <th className="round-col">Round</th>
+              {game.players.map((p) => (
+                <th key={p.id} className="player-col">
+                  {p.name}
+                </th>
               ))}
-              <th className="total-col">Total</th>
             </tr>
           </thead>
           <tbody>
-            {game.players.map((p) => (
-              <tr key={p.id}>
-                <th className="player-col" scope="row">
-                  <span className="player-name">{p.name}</span>
+            {game.rounds.map((r, i) => (
+              <tr key={i}>
+                <th className="round-col" scope="row">
+                  <span className="round-label">R{i + 1}</span>
+                  <button
+                    className="round-delete"
+                    title={`Delete round ${i + 1}`}
+                    aria-label={`Delete round ${i + 1}`}
+                    onClick={() => deleteRound(i)}
+                  >
+                    ✕
+                  </button>
                 </th>
-                {game.rounds.map((r, i) => (
-                  <td key={i} className="round-col">
+                {game.players.map((p) => (
+                  <td key={p.id}>
                     <ScoreInput
                       value={r.scores[p.id] ?? null}
                       onChange={(v) => setScore(i, p.id, v)}
@@ -56,10 +61,19 @@ export default function Rummy500Card({ game, update }: Props) {
                     />
                   </td>
                 ))}
-                <td className="total-col">{total(p.id)}</td>
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <th className="round-col" scope="row">Total</th>
+              {game.players.map((p) => (
+                <td key={p.id} className="total-col">
+                  {total(p.id)}
+                </td>
+              ))}
+            </tr>
+          </tfoot>
         </table>
       </div>
       <div className="table-actions">
