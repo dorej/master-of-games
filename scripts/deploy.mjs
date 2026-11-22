@@ -22,7 +22,7 @@ const usage = [
   "  --help         Show this message",
   "",
   "Environment:",
-  "  DEPLOY_SUBPATH   Override the package-name subpath",
+  "  DEPLOY_SUBPATH   Override the repository-name subpath",
   "  DEPLOY_BASE      Override the Vite base",
   "  SITE_URL         Override the verification URL"
 ].join("\n");
@@ -33,8 +33,16 @@ if (rootResult.error || rootResult.status !== 0) {
 }
 const root = rootResult.stdout.trim();
 
+function remoteProjectName() {
+  const gitBin = process.env.GIT || "git";
+  const result = spawnSync(gitBin, ["remote", "get-url", remote], { cwd: root, encoding: "utf8" });
+  if (result.error || result.status !== 0) return "";
+  const match = result.stdout.trim().match(/github\.com[:/](?:[^/]+\/)?([^/#?]+?)(?:\.git)?\/?$/i);
+  return match ? match[1] : "";
+}
+
 const packageInfo = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-const projectName = String(packageInfo.name || "").replace(/^@[^/]+\//, "").replace(/^\/+|\/+$/g, "");
+const projectName = (remoteProjectName() || String(packageInfo.name || "").replace(/^@[^/]+\//, "")).replace(/^\/+|\/+$/g, "");
 const subpath = (process.env.DEPLOY_SUBPATH || projectName || "app").replace(/^\/+|\/+$/g, "");
 const base = process.env.DEPLOY_BASE || `/${subpath}/`;
 const siteUrl = process.env.SITE_URL || `https://dorej.github.io/${subpath}/`;

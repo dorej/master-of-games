@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build --base=/score-card/",
-    "preview": "vite preview --base=/score-card/",
+    "build": "tsc --noEmit && vite build --base=/master-of-games/",
+    "preview": "vite preview",
     "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {

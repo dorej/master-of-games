@@ -6,7 +6,7 @@ totals in the browser — no account, backend, or spreadsheet required.
 The home menu also links to Janty (Chardee McDennis), the companion firepit
 party game.
 
-**Live app:** https://tyduptyler13.github.io/score-card/
+**Live app:** https://dorej.github.io/master-of-games/
 
 ## Games supported
 
@@ -45,7 +45,7 @@ Open the local URL printed by Vite; the production preview includes the
 | Command | Description |
 | --- | --- |
 | `npm run dev` | Start the Vite development server. |
-| `npm run build` | Type-check and build for production with the `/score-card/` base. |
+| `npm run build` | Type-check and build for production with the `/master-of-games/` base. |
 | `npm run preview` | Preview the production build locally. |
 | `npm run deploy` | Type-check, build, publish `dist/`, and verify the live site. |
 
@@ -87,10 +87,10 @@ src/
 
 ## Deployment
 
-`npm run deploy` builds with Vite base `/score-card/` and publishes the
+`npm run deploy` builds with Vite base `/master-of-games/` and publishes the
 generated `dist/` directory to `origin/gh-pages` by default:
 
-https://dorej.github.io/score-card/
+https://dorej.github.io/master-of-games/
 
 The upstream project remains at https://tyduptyler13.github.io/score-card/.
 Override the destination with `DEPLOY_REMOTE`, `DEPLOY_BRANCH`, and `SITE_URL`.
