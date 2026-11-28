@@ -4,6 +4,7 @@ import {
   faDice,
   faFire,
   faFlag,
+  faHeart,
   faLayerGroup,
   faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
@@ -33,9 +34,16 @@ interface Props {
   onNew: (type: GameType) => void;
   onOpen: (id: string) => void;
   onDelete: (id: string) => void;
+  onOpenFmc: () => void;
 }
 
-export default function HomeScreen({ games, onNew, onOpen, onDelete }: Props) {
+export default function HomeScreen({
+  games,
+  onNew,
+  onOpen,
+  onDelete,
+  onOpenFmc,
+}: Props) {
   const sorted = [...games].sort((a, b) => b.updatedAt - a.updatedAt);
 
   return (
@@ -173,6 +181,29 @@ export default function HomeScreen({ games, onNew, onOpen, onDelete }: Props) {
             </p>
             <span className="cta">Open Janty →</span>
           </a>
+
+          <button
+            type="button"
+            className="game-card"
+            onClick={onOpenFmc}
+          >
+            <div className="game-card-top">
+              <span className="game-badge">Party game</span>
+              <span className="game-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </div>
+            <span className="game-icon" aria-hidden="true">
+              <FontAwesomeIcon icon={faHeart} />
+            </span>
+            <h3>Fuck, Marry, Cancel</h3>
+            <span className="game-alias">Pass-and-play</span>
+            <p>
+              Draw three names, hand out the three fates, and let the table
+              argue about it.
+            </p>
+            <span className="cta">Open game →</span>
+          </button>
         </div>
       </section>
     </div>

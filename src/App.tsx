@@ -5,11 +5,13 @@ import { loadGames, saveGames } from './storage';
 import HomeScreen from './screens/HomeScreen';
 import SetupScreen from './screens/SetupScreen';
 import ScorecardScreen from './screens/ScorecardScreen';
+import FuckMarryCancelScreen from './screens/FuckMarryCancelScreen';
 
 type View =
   | { screen: 'home' }
   | { screen: 'setup'; type: GameType }
-  | { screen: 'game'; id: string };
+  | { screen: 'game'; id: string }
+  | { screen: 'fmc' };
 
 export default function App() {
   const [games, setGames] = useState<Game[]>(() => loadGames());
@@ -43,6 +45,10 @@ export default function App() {
 
   function deleteGame(id: string) {
     setGames((gs) => gs.filter((g) => g.id !== id));
+  }
+
+  if (view.screen === 'fmc') {
+    return <FuckMarryCancelScreen onBack={() => setView({ screen: 'home' })} />;
   }
 
   if (view.screen === 'setup') {
@@ -82,6 +88,7 @@ export default function App() {
       onNew={(type) => setView({ screen: 'setup', type })}
       onOpen={(id) => setView({ screen: 'game', id })}
       onDelete={deleteGame}
+      onOpenFmc={() => setView({ screen: 'fmc' })}
     />
   );
 }

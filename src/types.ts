@@ -75,3 +75,23 @@ export interface Standing {
   detail: string;
   finished: boolean;
 }
+
+export type FmcChoice = 'fuck' | 'marry' | 'cancel';
+
+export type FmcMode = 'custom' | 'random';
+
+export interface FmcRound {
+  playerName: string;
+  nominees: string[];
+  picks: Record<FmcChoice, string>;
+  at: number;
+}
+
+export interface FmcState {
+  mode: FmcMode;
+  players: string[];
+  nominees: string[];
+  turn: number;
+  draw: string[];
+  history: FmcRound[];
+}

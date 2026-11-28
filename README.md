@@ -4,8 +4,8 @@ A lightweight scorecard for card-game nights. Track players, rounds, and running
 totals in the browser — no account, backend, or spreadsheet required.
 
 The home screen is split into Score cards for tracked games and Games for full
-companion experiences. Janty (Chardee McDennis) is the first game in the Games
-section.
+companion experiences. Janty (Chardee McDennis) and Fuck, Marry, Cancel are the
+games in the Games section.
 
 **Live app:** https://dorej.github.io/master-of-games/
 
@@ -20,6 +20,15 @@ section.
 | Win Conditions | Free-form win statements with no numeric scoring. |
 
 Each game includes a built-in "How to score" reference on its setup screen.
+
+### Full games
+
+- Janty (Chardee McDennis) opens as a separate party game.
+- Fuck, Marry, Cancel is an in-app pass-and-play game: choose Custom or Random
+  nominees, add players in individual name boxes, draw three names, assign
+  each fate, and keep round history. Random mode assigns a hidden pool
+  automatically from a large built-in list. Its state is stored in
+  `localStorage` under `score-card.fmc.v1`.
 
 ### Rummy 500 options
 
@@ -70,6 +79,7 @@ src/
     HomeScreen.tsx         Game list and new-game picker
     SetupScreen.tsx        Player names and per-game options
     ScorecardScreen.tsx    Standings, winner banner, scorecard switcher
+    FuckMarryCancelScreen.tsx  Pass-and-play party game
     scorecards/
       Phase10Card.tsx
       FiveCrownsCard.tsx

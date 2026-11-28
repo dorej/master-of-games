@@ -1,6 +1,22 @@
-import type { Game, Scores } from './types';
+import type {
+  FmcChoice,
+  FmcRound,
+  FmcState,
+  Game,
+  Scores,
+} from './types';
 
 const KEY = 'score-card.games.v1';
+const FMC_KEY = 'score-card.fmc.v1';
+
+export const EMPTY_FMC_STATE: FmcState = {
+  mode: 'custom',
+  players: [],
+  nominees: [],
+  turn: 0,
+  draw: [],
+  history: [],
+};
 
 export function loadGames(): Game[] {
   try {
@@ -74,6 +90,71 @@ export function loadGames(): Game[] {
 export function saveGames(games: Game[]): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(games));
+  } catch {
+    // storage unavailable; app still works in-session
+  }
+}
+
+function stringList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((item): item is string => typeof item === 'string')
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+export function loadFmcState(): FmcState {
+  try {
+    const raw = localStorage.getItem(FMC_KEY);
+    if (!raw) return EMPTY_FMC_STATE;
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return EMPTY_FMC_STATE;
+    const data = parsed as Partial<FmcState>;
+    const history: FmcRound[] = Array.isArray(data.history)
+      ? data.history.flatMap((rawRound): FmcRound[] => {
+          if (!rawRound || typeof rawRound !== 'object') return [];
+          const round = rawRound as Partial<FmcRound>;
+          const picksRaw =
+            round.picks && typeof round.picks === 'object'
+              ? (round.picks as Record<string, unknown>)
+              : {};
+          const picks = {} as Record<FmcChoice, string>;
+          for (const choice of ['fuck', 'marry', 'cancel'] as const) {
+            const value = picksRaw[choice];
+            picks[choice] = typeof value === 'string' ? value : '';
+          }
+          return [
+            {
+              playerName:
+                typeof round.playerName === 'string'
+                  ? round.playerName
+                  : 'Player',
+              nominees: stringList(round.nominees),
+              picks,
+              at: typeof round.at === 'number' ? round.at : 0,
+            },
+          ];
+        })
+      : [];
+    return {
+      mode: data.mode === 'random' ? 'random' : 'custom',
+      players: stringList(data.players),
+      nominees: stringList(data.nominees),
+      turn:
+        typeof data.turn === 'number' && Number.isFinite(data.turn)
+          ? Math.max(0, Math.floor(data.turn))
+          : 0,
+      draw: stringList(data.draw),
+      history,
+    };
+  } catch {
+    return EMPTY_FMC_STATE;
+  }
+}
+
+export function saveFmcState(state: FmcState): void {
+  try {
+    localStorage.setItem(FMC_KEY, JSON.stringify(state));
   } catch {
     // storage unavailable; app still works in-session
   }
